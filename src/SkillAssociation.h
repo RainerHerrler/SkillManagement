@@ -6,9 +6,14 @@
 
 class SkillAssociation {
 private:
-    // enter necessary Attributes here
+	Employee* person_;
+	Skill* skill_;
+	int skillLevel_;
 public:
-    // add constructor and getter
+	SkillAssociation(Employee* person, Skill* skill, int skillLevel);
+	Employee* getEmployee() const;
+	Skill* getSkill() const;
+	int getSkillLevel() const;
 };
 
 #endif /* SKILLASSOCIATION_H_ */
