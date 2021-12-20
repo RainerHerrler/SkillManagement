@@ -124,7 +124,6 @@ void SkillManagementUI::listEmployees(const string &skillName) {
 			skillManager_->getListOfEmployees(skillName));
 }
 
-// TODO make this look more pretty
 int SkillManagementUI::startMenu() {
 	string input;
 	showMenu();
