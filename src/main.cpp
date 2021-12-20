@@ -1,37 +1,11 @@
 #include <iostream>
-#include <vector>
 #include <iomanip>
 #include "Skill.h"
 #include "Employee.h"
 #include "SkillAssociation.h"
+#include "SkillManager.h"
 
 using namespace std;
-
-// implement functions for the following prototypes
-void printEmployeeList(const string &headLine, const vector<Employee*> &employeeList);
-void printSkillList(const string &headLine, const vector<Skill*> &skillList);
-void printAssociations(const string &headLine, const vector<SkillAssociation*> &associationsList);
-
-int main() {
-	vector<Employee*> employeeList;
-	employeeList.push_back(new Employee("0001", "Max Muster", "FE"));
-	employeeList.push_back(new Employee("0002", "Rainer Herrler", "FE"));
-
-	vector<Skill*> skillList;
-	skillList.push_back(new Skill("C++", "C++", SkillCategory::software));
-	skillList.push_back(new Skill("Java", "Java", SkillCategory::softSkill));
-	skillList.push_back(new Skill("Elektrotechnik", "Electrical Engineering", SkillCategory::hardware));
-
-	vector<SkillAssociation*> skillAssociationList;
-	skillAssociationList.push_back(new SkillAssociation(employeeList[0], skillList[2], 5));
-	skillAssociationList.push_back(new SkillAssociation(employeeList[0], skillList[1], 4));
-	skillAssociationList.push_back(new SkillAssociation(employeeList[1], skillList[0], 3));
-	skillAssociationList.push_back(new SkillAssociation(employeeList[1], skillList[1], 5));
-
-	printEmployeeList("***Employees***", employeeList);
-	printSkillList("***Skills***", skillList);
-	printAssociations("***Associations***", skillAssociationList);
-}
 
 void printEmployeeList(const string &headLine, const vector<Employee*> &employeeList) {
 	cout << headLine << endl;
@@ -52,5 +26,25 @@ void printAssociations(const string &headLine, const vector<SkillAssociation*> &
 	for (SkillAssociation *skill : associationsList) {
 		cout << " - " << skill->getEmployee()->getName() << " " << skill->getSkill()->getName() << " " << skill->getSkillLevel() << endl;
 	}
+}
+
+int main() {
+	SkillManager manager;
+
+	manager.addEmployee("0001", "Max Muster", "FE");
+	manager.addEmployee("0002", "Rainer Herrler", "FE");
+
+	manager.addSkill("C++", "C++", SkillCategory::software);
+	manager.addSkill("Java", "Java", SkillCategory::softSkill);
+	manager.addSkill("Elektrotechnik", "Electrical Engineering",SkillCategory::hardware);
+
+	manager.enterSkillAssociation("0001", "Elektrotechnik", 5);
+    manager.enterSkillAssociation("0001", "Java", 4);
+	manager.enterSkillAssociation("0002", "C++", 3);
+	manager.enterSkillAssociation("0002", "Java", 5);
+
+	printEmployeeList("**** Employee ****", manager.getListOfEmployees());
+	printSkillList("**** Skills ****", manager.getListOfSkills());
+	printAssociations("**** Associations ****", manager.getListOfSkillAssociations());
 }
 
