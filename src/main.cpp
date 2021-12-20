@@ -1,7 +1,11 @@
-#include <iostream>
 #include <iomanip>
-#include "Skill.h"
+#include <iostream>
+#include <string>
+#include <vector>
+
 #include "Employee.h"
+#include "Example2.h"
+#include "Skill.h"
 #include "SkillAssociation.h"
 #include "SkillManager.h"
 
@@ -29,22 +33,28 @@ void printAssociations(const string &headLine, const vector<SkillAssociation*> &
 }
 
 int main() {
-	SkillManager manager;
+	SkillManager skillManager;
 
-	manager.addEmployee("0001", "Max Muster", "FE");
-	manager.addEmployee("0002", "Rainer Herrler", "FE");
+	// Example creation was outsourced
+	Example example;
+	example.addExampleTo(skillManager);
 
-	manager.addSkill("C++", "C++", SkillCategory::software);
-	manager.addSkill("Java", "Java", SkillCategory::softSkill);
-	manager.addSkill("Elektrotechnik", "Electrical Engineering",SkillCategory::hardware);
+	// now find all employees with skill "Java"
+	cout << "Finding employees with skill \"Java\"." << endl;
+	vector<Employee*> javaPeople = skillManager.getListOfEmployees("Java");
+	printEmployeeList("**JAVAPEOPLE***", javaPeople);
 
-	manager.enterSkillAssociation("0001", "Elektrotechnik", 5);
-    manager.enterSkillAssociation("0001", "Java", 4);
-	manager.enterSkillAssociation("0002", "C++", 3);
-	manager.enterSkillAssociation("0002", "Java", 5);
+	// now find all skills of employee "Rainer Herrler" with id 0002
+	cout << "Finding skills of employee \"Rainer Herrler\"." << endl;
+	vector<Skill*> herrlerSkills = skillManager.getListOfSkills("0002");
+	printSkillList("**HERRLERSKILLS***", herrlerSkills);
 
-	printEmployeeList("**** Employee ****", manager.getListOfEmployees());
-	printSkillList("**** Skills ****", manager.getListOfSkills());
-	printAssociations("**** Associations ****", manager.getListOfSkillAssociations());
+	// now remove employee "Max Muster" with id "0001"
+	cout << "Removing \"Max Muster\"." << endl;
+	skillManager.removeEmployee("0001");
+
+	// Print the all SkillAssociations
+	cout << "Print all SkillAssociations" << endl;
+	printAssociations("After Removal", skillManager.getListOfSkillAssociations());
 }
 

@@ -13,16 +13,22 @@ private:
 	vector<Skill*> skillList_;
 	vector<SkillAssociation*> skillAssociationList_;
 
-	Employee* findEmployee(const std::string &employeeID);
-	Skill* findSkill(const std::string &skillName);
-
+	void removeEmployee(const Employee* employee);
+	Employee* findEmployee(const string& employeeID);
+	Skill* findSkill(const string& skillName);
 public:
-	// Use cases from the original description
+	virtual ~SkillManager();
+	// Use cases
 	void addEmployee(string employeeID, string name, string department);
 	void addSkill(string germanName, string englishName, SkillCategory category);
 	void enterSkillAssociation(string employeeID, string skillName, int skillLevel); // may throw errors
-	const vector<Employee*> getListOfEmployees();
-	const vector<Skill*> getListOfSkills();
+	bool removeEmployee(const string& employeeID);
+	vector<Employee*> getListOfEmployees(string skillName);
+	vector<Skill*> getListOfSkills(string employeeID);
+
+	// Further Use Cases for access
+	const vector<Employee*>& getListOfEmployees();
+	const vector<Skill*>& getListOfSkills();
 	const vector<SkillAssociation*> getListOfSkillAssociations();
 };
 
