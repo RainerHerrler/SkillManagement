@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <iomanip>
+#include "Mytools.h"
 
 using namespace std;
+using namespace Mytools;
 
 SkillManagementUI::SkillManagementUI(SkillManager *management) :
 		skillManager_(management) { }
@@ -124,6 +126,7 @@ void SkillManagementUI::listEmployees(const string &skillName) {
 			skillManager_->getListOfEmployees(skillName));
 }
 
+// TODO make this look more pretty
 int SkillManagementUI::startMenu() {
 	string input;
 	showMenu();
@@ -156,17 +159,3 @@ int SkillManagementUI::startMenu() {
 	} while (input != "exit");
 	return 0;
 }
-
-string& SkillManagementUI::trim(string &input) {
-	input.erase(input.find_last_not_of(" \n\r\t") + 1);
-	return input;
-}
-
-string SkillManagementUI::query(const string& inputText) {
-	cout << inputText;
-	string readLine;
-	std::getline(std::cin, readLine);
-	trim(readLine);
-	return readLine;
-}
-

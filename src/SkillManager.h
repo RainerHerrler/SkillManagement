@@ -16,7 +16,6 @@ private:
 	void removeEmployee(const Employee* employee);
 	Employee* findEmployee(const string& employeeID);
 	Skill* findSkill(const string& skillName);
-
 public:
 	virtual ~SkillManager();
 	// Use cases

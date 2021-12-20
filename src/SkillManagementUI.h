@@ -21,9 +21,7 @@ private:
 	bool startsWith(const string &input, const char *startStr);
 	void listSkills(const string &employeeID);
 	void listEmployees(const string &skillName);
-	// Helper functions
-	string& trim(string& input);
-	string query(const string& inputText);
+
 public:
 	SkillManagementUI(SkillManager* skillManager);
 	void printEmployeeList(const string& headLine, const vector<Employee*> &employeeList);
