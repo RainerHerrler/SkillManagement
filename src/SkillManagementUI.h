@@ -9,14 +9,27 @@
 
 class SkillManagementUI {
 private:
-	//converts a string to the skill category enumeration
+	SkillManager* skillManager_;
+	void enterEmployee();
+	void enterSkill() ;
 	static SkillCategory getCategory(const string& categoryName);
-	// prints the menu options on the terminal
+	void listEmployees();
 	void showMenu();
+	void listSkills();
+	void removeEmployee(const string& input);
+	void enterAssociation();
+	bool startsWith(const string &input, const char *startStr);
+	void listSkills(const string &employeeID);
+	void listEmployees(const string &skillName);
+	// helper functions
+	string& trim(string &input);
+	string query(const string& inputText);
 public:
-	SkillManagementUI(SkillManager*);
-	// start the user menu in a loop until the user enters "exit"
-	void startMenu();
+	SkillManagementUI(SkillManager* skillManager);
+	void printEmployeeList(const string& headLine, const vector<Employee*> &employeeList);
+	void printSkillList(const string& headLine, const vector<Skill*> &skillList);
+	void printAssociations(const string& headLine, const vector<SkillAssociation*> &associationsList);
+	int startMenu();
 };
 
 #endif /* SKILLMANAGEMENTUI_H_ */
